@@ -1,7 +1,6 @@
 package org.roya.royalyouthcommunity.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,9 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Table(name = "payments")
-public class payment {
+public class Payment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
     private String currency;
@@ -22,4 +23,10 @@ public class payment {
     private String providerRef;
     private String idempotencyKey;
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
+    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
+    private  Members member;
 }
