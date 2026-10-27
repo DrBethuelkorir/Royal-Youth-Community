@@ -15,7 +15,6 @@ import java.util.List;
 public class UserResponse {
     private int statusCode;
     private String message;
-    private String token;
     private UserDto userDto;
     private List<UserDto> usersDto;
 }
